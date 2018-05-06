@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "rootDir": "src",
+
+        "target": "es2016",
+        "module": "ESNExt",
+        "moduleResolution": "node",
+
+        "jsx": "react",
+        "sourceMap": true,
+
+        "noImplicitReturns": false,
+        "noImplicitThis": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "allowSyntheticDefaultImports": true,
+    },
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
