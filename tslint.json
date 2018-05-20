@@ -5,6 +5,7 @@
     ],    
     "rules": {
         "ter-indent": false,
-        "import-name": false
+        "import-name": false,
+        "eofline": false
     }
 }
