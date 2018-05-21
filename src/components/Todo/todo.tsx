@@ -86,7 +86,6 @@ type TodoListProps = {
 class TodoList extends React.Component<TodoListProps> {
     style : NestedCSSProperties = {
         border: '1px solid black',
-        display: 'grid',
     };
 
     public render() {
@@ -125,14 +124,16 @@ type TodoItemProps = {
 
 class TodoItem extends React.Component<TodoItemProps> {
     public render() {
-        return <label className={style(this.getLabelStyle(this.props.value.isCompleted))}>
-                    <input 
-                        type = "checkbox"
-                        key={this.props.value.id}
-                        checked={this.props.value.isCompleted}
-                        onChange={this.onItemCompleted.bind(this)}/>
-                    {this.props.value.text}
-               </label>;
+        return  <div> 
+                    <label className={style(this.getLabelStyle(this.props.value.isCompleted))}>
+                        <input 
+                            type = "checkbox"
+                            key={this.props.value.id}
+                            checked={this.props.value.isCompleted}
+                            onChange={this.onItemCompleted.bind(this)}/>
+                        {this.props.value.text}
+                    </label>
+                </div>;
     }
 
     private getLabelStyle(isCompleted: boolean) : NestedCSSProperties {
