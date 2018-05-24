@@ -3,14 +3,6 @@ import { style } from 'typestyle';
 import { NestedCSSProperties } from 'typestyle/lib/types';
 
 
-
-type TodoItemValue = {
-    readonly id: string;
-    readonly text : string;
-    readonly isCompleted : boolean;
-    readonly timestamp : Date;
-};
-
 type TodoListValue = {
     readonly items : TodoItemValue[];
     readonly showCompleted : boolean;
@@ -18,9 +10,14 @@ type TodoListValue = {
 
 type TodoItemEventHandler = (item: TodoItemValue) => void;
 
+export type TodoItemValue = {
+    readonly id: string;
+    readonly text : string;
+    readonly isCompleted : boolean;
+    readonly timestamp : Date;
+};
 
-
-class Todo extends React.Component<TodoListValue, TodoListValue> {
+export class Todo extends React.Component<TodoListValue, TodoListValue> {
     constructor(props: TodoListValue) {
         super(props);
         this.state = props;
@@ -34,7 +31,7 @@ class Todo extends React.Component<TodoListValue, TodoListValue> {
     });
 
     public render() {
-        return <div className={this.style}>
+        return  <div className={this.style}>
                     <TodoListAddItemForm 
                         onAddItem={this.onAddItem.bind(this)} />
                     
@@ -42,10 +39,10 @@ class Todo extends React.Component<TodoListValue, TodoListValue> {
                         list={this.getList()} 
                         onItemToggled={this.onItemToggled.bind(this)} />
                         
-                    <HideCompletedButton 
+                    <ToggleCompletedButton 
                             showCompleted={this.state.showCompleted}
-                            onHideCompleted={this.onHideCompleted.bind(this)} />
-               </div>;
+                            onToggleCompleted={this.onToggleCompleted.bind(this)} />
+                </div>;
     }
 
     private onAddItem(item: TodoItemValue) {
@@ -62,7 +59,7 @@ class Todo extends React.Component<TodoListValue, TodoListValue> {
         this.setState({ items });
     }
 
-    private onHideCompleted() {
+    private onToggleCompleted() {
         this.setState({ showCompleted: !this.state.showCompleted });
     }
 
@@ -75,14 +72,13 @@ class Todo extends React.Component<TodoListValue, TodoListValue> {
         return { ...this.state, items };
     }
 }
-export default Todo;
+
 
 
 type TodoListProps = {
     list: TodoListValue; 
     onItemToggled: TodoItemEventHandler;
 };
-
 class TodoList extends React.Component<TodoListProps> {
     style : NestedCSSProperties = {
         border: '1px solid black',
@@ -121,16 +117,17 @@ type TodoItemProps = {
      value: TodoItemValue;
      onItemToggled: TodoItemEventHandler;
 };
-
 class TodoItem extends React.Component<TodoItemProps> {
     public render() {
+        const labelClass = style(this.getLabelStyle(this.props.value.isCompleted));
+
         return  <div> 
-                    <label className={style(this.getLabelStyle(this.props.value.isCompleted))}>
+                    <label className={labelClass}>
                         <input 
                             type = "checkbox"
                             key={this.props.value.id}
                             checked={this.props.value.isCompleted}
-                            onChange={this.onItemCompleted.bind(this)}/>
+                            onChange={this.onCheckboxChange.bind(this)}/>
                         {this.props.value.text}
                     </label>
                 </div>;
@@ -143,7 +140,7 @@ class TodoItem extends React.Component<TodoItemProps> {
         };
     }
 
-    private onItemCompleted() {
+    private onCheckboxChange() {
         this.props.onItemToggled(this.props.value);
     }
 }
@@ -156,13 +153,11 @@ type TodoListAddItemFormProps = {
 type TodoListAddItemFormState = {
     readonly text: string,
 };
-
 class TodoListAddItemForm 
     extends React.Component<TodoListAddItemFormProps, TodoListAddItemFormState> {
 
     constructor(props: TodoListAddItemFormProps) {
         super(props);
-
         this.state = { text: '' };
     }
 
@@ -196,20 +191,19 @@ class TodoListAddItemForm
 }
 
 
-type HideCompletedEventHandler = () => void;
-type HideCompletedButtonProps = {
-    onHideCompleted: HideCompletedEventHandler,
+
+type ToggleCompletedEventHandler = () => void;
+type ToggleCompletedButtonProps = {
+    onToggleCompleted: ToggleCompletedEventHandler,
     showCompleted: boolean,
 };
-
-class HideCompletedButton extends React.Component<HideCompletedButtonProps> {
+class ToggleCompletedButton extends React.Component<ToggleCompletedButtonProps> {
     public render() {
         const btnName = this.props.showCompleted ? 'Hide Completed' : 'Show Completed'; 
         return <button onClick={this.onButtonClick.bind(this)}>{btnName}</button>;
     }
 
     private onButtonClick() {
-        this.props.onHideCompleted();
-
+        this.props.onToggleCompleted();
     }
 }
