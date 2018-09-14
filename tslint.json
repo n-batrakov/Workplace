@@ -1,8 +1,8 @@
 {
-    "defaultSeverity": "error",
+    "defaultSeverity": "warning",
     "extends": [
         "tslint-config-airbnb"
-    ],    
+    ],
     "rules": {
         "ter-indent": false,
         "import-name": false,
