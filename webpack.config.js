@@ -1,6 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     entry: "./src/index.tsx",
@@ -17,6 +20,7 @@ module.exports = {
             from: 'src/static',
             to: ''
         }]),
+        new MiniCssExtractPlugin(),
     ],
     resolve: {
         extensions: ['.js', '.json', '.ts', '.tsx']
@@ -29,12 +33,40 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader','css-loader']
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
+            },
+            {
+                test: /\.less$/,
+                use: [{
+                    loader: MiniCssExtractPlugin.loader
+                },
+                {
+                    loader: 'css-loader'
+                },
+                {
+                    loader: 'less-loader',
+                    options: {
+                        javascriptEnabled: true
+                    }
+                }]
             }
         ]
     },
     devtool: 'source-map',
     devServer: {
         historyApiFallback: true
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all'
+        },
+        minimizer: [
+            new UglifyJsPlugin({
+                parallel: true,
+                cache: true,
+                sourceMap: true
+            }),
+            new OptimizeCSSAssetsPlugin({})
+        ]
     }
 };

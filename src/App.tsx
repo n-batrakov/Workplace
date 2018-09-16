@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import { Skeleton, Menu, Icon, Avatar, Badge, Popover } from 'antd';
-import 'antd/dist/antd.css';
 import { style } from 'typestyle';
 import { HomePage, LeavesPage, NotFoundPage } from './pages';
 import AppLayout from './components/Layout';

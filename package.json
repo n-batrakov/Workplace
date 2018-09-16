@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode development",
+    "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development"
   },
   "author": "",
@@ -27,10 +27,15 @@
     "csstips": "^0.2.3",
     "csx": "^8.5.0",
     "html-webpack-plugin": "^3.2.0",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.4.2",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "style-loader": "^0.23.0",
     "tslint": "^5.10.0",
     "tslint-config-airbnb": "^5.8.0",
     "typescript": "^2.9.2",
+    "uglifyjs-webpack-plugin": "^2.0.0",
     "webpack": "^4.8.1",
     "webpack-cli": "^2.1.5",
     "webpack-dev-server": "^3.1.8"
