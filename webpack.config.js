@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-
+const getTheme = require('./src/theme');
 
 module.exports = {
     entry: {
@@ -60,7 +60,8 @@ module.exports = {
                 {
                     loader: 'less-loader',
                     options: {
-                        javascriptEnabled: true
+                        javascriptEnabled: true,
+                        modifyVars: getTheme()
                     }
                 }]
             }
