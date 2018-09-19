@@ -5,29 +5,29 @@ import { style } from 'typestyle';
 import { HomePage, LeavesPage, NotFoundPage } from './pages';
 import AppLayout from './components/Layout';
 
+import * as Theme from './theme';
 
-class MonospaceLogo extends React.PureComponent<{text: string}> {
+class ThemeLogo extends React.PureComponent<{text: string}> {
     style: string = style({
-        color: '#336699',
-        fontSize: '25px',
-        fontFamily: 'monospace',
+        color: Theme.logoColor,
+        font: Theme.logoFont,
+
         margin: '10px',
         whiteSpace: 'nowrap',
         userSelect: 'none',
         $nest: {
             '&:hover': { 
-                color: '#4488cc', 
+                color: Theme.logoColorActive,
             },
         },
     });
 
     public render() {
-        return <div className={this.style}>{this.props.text}</div>;
+        return <div className={this.style}>{Theme.logoText}</div>;
     }
 }
 
 class AppMenu extends React.Component {
-
     private getSelectedKey(): string {
         return window.location.pathname;
     }
@@ -35,9 +35,10 @@ class AppMenu extends React.Component {
     public render() {
         return (
             <div>
-                <Menu theme="dark" 
+                <Menu theme="dark"
                       mode="inline" 
-                      defaultSelectedKeys={[this.getSelectedKey()]}>
+                      defaultSelectedKeys={[this.getSelectedKey()]}
+                      style={{ border: 'none' }}>
                     <Menu.Item key="/">
                         <Link to="/">
                             <Icon type="home" />
@@ -77,7 +78,7 @@ class AppToolbox extends React.Component {
         float: 'right',
         height: '100%',
         overflow: 'hidden',
-        color: '#ffffff',
+        padding: '0px 5px',
         display: 'flex',
     });
 
@@ -94,11 +95,12 @@ class AppToolbox extends React.Component {
 
 class AppToolboxItem extends React.Component {
     style: string = style({
-        padding: '0px 10px',
-        minWidth: '50px',
+        padding: '0px 20px',
+        color: Theme.brandColorFont,
         $nest: {
             '&:hover': {
-                backgroundColor: '#11263a',
+                color: Theme.brandColorFontAccent,
+                backgroundColor: Theme.brandColorAccent,
             },
         },
     });
@@ -115,7 +117,7 @@ class AppToolboxItem extends React.Component {
 class AccountMenuButton extends React.Component {
     public render() {
         return (
-            <span style={{ marginRight: 24 }}>
+            <span>
                 <Badge count={2}>
                     <Popover placement="bottomRight" content={this.props.children} trigger="click">
                         <Avatar shape="circle" icon="user" />
@@ -143,6 +145,9 @@ class App extends React.Component {
         const header = (
             <AppToolbox>
                 <AppToolboxItem>
+                    <Icon type="search" />
+                </AppToolboxItem>
+                <AppToolboxItem>
                     <AccountMenuButton>
                         <AccountMenu/>
                     </AccountMenuButton>
@@ -152,7 +157,7 @@ class App extends React.Component {
 
         const sider = (
             <div>
-                <MonospaceLogo text="> workplace" />
+                <ThemeLogo text="> workplace" />
                 <div className={style({ marginTop: '15px' })}>
                     <AppMenu />
                 </div>
