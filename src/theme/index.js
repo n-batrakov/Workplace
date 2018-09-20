@@ -18,9 +18,10 @@ module.exports = {
     brandColorActive: '#3f51b5',
     brandColorFontActive: '#ffffff',
 
-    logoText: '> workplace',
-    logoFont: '30px monospace,serif',
-    logoColor: '#3f51b5',
+    logoText: 'workplace',
+    logoFont: '15px monospace,serif',
+    logoImage: '/images/icon/512.png',
+    logoColor: '#aaa',
     logoColorActive: '#2196f3',
 
 

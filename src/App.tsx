@@ -12,9 +12,11 @@ class ThemeLogo extends React.PureComponent<{text: string}> {
         color: Theme.logoColor,
         font: Theme.logoFont,
 
-        margin: '10px',
+        margin: '10px 25px',
         whiteSpace: 'nowrap',
         userSelect: 'none',
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
         $nest: {
             '&:hover': { 
                 color: Theme.logoColorActive,
@@ -23,7 +25,17 @@ class ThemeLogo extends React.PureComponent<{text: string}> {
     });
 
     public render() {
-        return <div className={this.style}>{Theme.logoText}</div>;
+        const hasImage = Theme.logoImage === undefined || 
+                         Theme.logoImage === null || 
+                         Theme.logoImage === '';
+        const image = hasImage
+            ? null 
+            : <img src={Theme.logoImage} style={{ width: '35px', marginRight: '15px' }}/>
+
+        return <div className={this.style}>
+            {image}
+            {Theme.logoText}
+        </div>;
     }
 }
 
