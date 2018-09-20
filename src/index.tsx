@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { render } from 'react-dom';
-import App from './App';
+import { LocaleProvider } from 'antd';
 import 'antd/dist/antd.less';
+import App from './App';
 
 
 if ('serviceWorker' in navigator) {
@@ -18,4 +19,11 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-render(<App />, document.getElementById('app'));
+import('antd/lib/locale-provider/en_US').then((locale) => {
+    render (
+        <LocaleProvider locale={locale.default}>
+            <App />
+        </LocaleProvider>, 
+        document.getElementById('app'),
+    );
+});

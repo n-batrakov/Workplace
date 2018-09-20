@@ -1,13 +1,4 @@
 var CACHE = 'offline-fallback';
-var ASSETS = [
-    './',
-    './images',
-    './app.bundle.js',
-    './favicon.png',
-    './index.html',
-    './vendors~app.bundle.js',
-    './vendors~app.css'
-];
 var FALLBACK =
     '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="180" stroke-linejoin="round">' +
     '  <path stroke="#DDD" stroke-width="25" d="M99,18 15,162H183z"/>' +
@@ -16,17 +7,6 @@ var FALLBACK =
     '  <circle cy="138" r="9" cx="100" fill="#aaa"/>' +
     '</svg>';
 
-self.addEventListener('install', function(evt) {
-  evt.waitUntil(precache().then(function () {
-    return self.skipWaiting();
-  }));
-
-  function precache() {
-    return caches.open(CACHE).then(function (cache) {
-      return cache.addAll(ASSETS);
-    });
-  }
-});
 
 self.addEventListener('activate', function (evt) {
   evt.waitUntil(self.clients.claim());
