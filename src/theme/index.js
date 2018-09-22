@@ -21,8 +21,8 @@ module.exports = {
     logoText: 'workplace',
     logoFont: '15px monospace,serif',
     logoImage: '/images/icon/512.png',
-    logoColor: '#aaa',
-    logoColorActive: '#2196f3',
+    logoColor: '#dde2e5',
+    logoColorActive: '#3f51b5',
 
 
     toLessVariables: function() {
@@ -37,6 +37,8 @@ module.exports = {
             'menu-dark-submenu-bg': this.brandColorAccent,
             'menu-dark-highlight-color': this.brandColorFontActive,
             'menu-dark-item-active-bg': this.brandColorActive,
+
+            'primary-color': this.brandColorActive
         }
     }
 }
