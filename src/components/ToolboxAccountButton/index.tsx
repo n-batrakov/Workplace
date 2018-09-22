@@ -5,13 +5,13 @@ import React from 'react';
 export class AccountMenuButton extends React.Component {
     public render() {
         return (
-            <span>
-                <Badge count={2}>
-                    <Popover placement="bottomRight" content={this.props.children} trigger="click">
+            <Popover placement="bottomRight" content={this.props.children}>
+                <span>
+                    <Badge count={2}>
                         <Avatar shape="circle" icon="user" />
-                    </Popover>
-                </Badge>
-            </span>
+                    </Badge>
+                </span>
+            </Popover>
         );
     }
 }
