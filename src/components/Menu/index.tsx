@@ -27,6 +27,12 @@ export default class AppMenu extends React.Component {
                             <span className="nav-text">Leaves</span>
                         </Link>
                     </Menu.Item>
+                    <Menu.Item key="/team">
+                        <Link to="/team">
+                            <Icon type="team" />
+                            <span className="nav-text">Team</span>
+                        </Link>
+                    </Menu.Item>
                 </Menu>
             </div>
         );
