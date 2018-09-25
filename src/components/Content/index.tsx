@@ -6,6 +6,7 @@ export default class AppContent extends React.Component {
     style: string = style({
         padding: '10px',
         height: '100%',
+        overflow: 'auto',
     });
 
     public render() {

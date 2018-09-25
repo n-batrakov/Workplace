@@ -14,6 +14,7 @@ module.exports = {
     output: {
         filename: "[name].bundle.js",
         path: path.resolve(__dirname, 'dist'),
+        publicPath: '/'
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -74,7 +75,7 @@ module.exports = {
             key: fs.readFileSync('./cert/server.key'),
             cert: fs.readFileSync('./cert/server.crt'),
             ca: fs.readFileSync('./cert/rootCA.pem'),
-          }
+        },
     },
     optimization: {
         splitChunks: {
