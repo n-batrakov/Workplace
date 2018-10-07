@@ -18,7 +18,6 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Workplace',
             template: './src/index.html'
         }),
         new CopyWebpackPlugin([{
