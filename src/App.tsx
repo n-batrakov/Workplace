@@ -3,7 +3,6 @@ import {
     BrowserRouter as Router, 
     Route, 
     Switch, 
-    RouteComponentProps, 
     Link } from 'react-router-dom';
 import { Icon, Menu } from 'antd';
 
@@ -12,39 +11,14 @@ import { Toolbox, ToolboxItem } from './components/Toolbox';
 import { AccountMenuButton, AccountMenu } from './components/ToolboxAccountButton';
 import Content from './components/Content';
 
-import { NotFoundPage } from './pages';
-import HomePage from './pages/Home';
-import LeavesPage from './pages/Leaves';
-import TeamPage from './pages/Team';
+import { NotFoundPage } from './components/Pages';
+import { PagesProvider } from './pagesProvider';
+import { PageInfo } from './core/types';
 
 
-type PageInfo = {
-    title: string;
-    icon: string;
-    route: string;
-    component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
-};
 
-const pagesConfig: PageInfo[] = [
-    {
-        route: '/',
-        title: 'Home',
-        icon: 'home',
-        component: HomePage,
-    },
-    {
-        route: '/leave',
-        title: 'Leaves',
-        icon: 'calendar',
-        component: LeavesPage,
-    },
-    {
-        route: '/company',
-        title: 'Company',
-        icon: 'team',
-        component: TeamPage,
-    },
-];
+
+
 
 class PageMenu extends React.Component<{pages: PageInfo[]}> {
     public render() {
@@ -92,9 +66,12 @@ class PageConent extends React.Component<{pages: PageInfo[]}> {
 
 export default class App extends React.Component {
     public render() {
+        const pagesProvider = new PagesProvider();
+        const pages = pagesProvider.getPages();
+        
         const header = this.renderHeader();
-        const sider = <PageMenu pages={pagesConfig} />;
-        const content = <PageConent pages={pagesConfig} />;
+        const sider = <PageMenu pages={pages} />;
+        const content = <PageConent pages={pages} />;
 
         return (
             <Router>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Row, Col, Card, Icon, Tabs, Radio, Spin, Avatar } from 'antd';
 import ContentContainer from '../../components/ContentContainer';
 import { RadioChangeEvent } from 'antd/lib/radio';
-import { ErrorPage } from '..';
+import { ErrorPage } from '../../components/Pages';
 
 
 type Employee = {
